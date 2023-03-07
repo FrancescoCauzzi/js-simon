@@ -2,6 +2,10 @@ let numbersContainerEL = document.querySelector(".__numbers-container");
 let inputContainerEl = document.querySelector(".__input-container");
 
 let timerDisplay = document.querySelector(".__timer-card");
+let verifyBtn = document.getElementById("verify-btn");
+let playBtn = document.getElementById("play-btn");
+
+playBtn.addEventListener("click", countdown);
 
 // create a function that generates the input divs
 function generateInputDivs(father, type, number, className) {
@@ -22,7 +26,7 @@ function generateInputDivs(father, type, number, className) {
 // create a function that generates the divs with the numbers inside and attach them to the father container
 
 function generateNumbersDivs(father, type, number, className) {
-  let arrOfRandNumbers = generateArrOfRandNumber(100, number);
+  let arrOfRandNumbers = generateArrOfRandNumber(10, number);
   for (let i = 0; i < number; i++) {
     let myDiv = document.createElement(type);
     myDiv.classList.add(className);
@@ -47,23 +51,47 @@ function generateArrOfRandNumber(maxNumb, arrLength) {
 }
 
 // creao la funzione countdown
-function countdown(seconds) {
-  let countdownStart = seconds;
+function countdown() {
+  let countdownStart = 6;
 
   generateNumbersDivs(numbersContainerEL, "div", 5, "__numbers-card");
   function updateTimerDisplay() {
-    let myCards = document.querySelectorAll(".__numbers-card");
-    //console.log(myCards);
     countdownStart--;
 
     timerDisplay.innerHTML = countdownStart;
 
+    let myCards = document.querySelectorAll(".__numbers-card");
+    let myNewArr = [];
+    for (let i = 0; i < myCards.length; i++) {
+      myNewArr.push(Number(myCards[i].innerHTML));
+    }
     if (countdownStart === 0) {
       for (let i = 0; i < myCards.length; i++) {
         myCards[i].innerHTML = "";
+        verifyBtn.style.display = "block";
         generateInputDivs(inputContainerEl, "div", 1, "__input-card");
       }
       clearInterval(intervalId);
+
+      verifyBtn.addEventListener("click", function () {
+        let myInputCards = document.querySelectorAll(".__input-card input");
+        console.log(myCards);
+        let areEqual = true;
+        for (let i = 0; i < myInputCards.length; i++) {
+          console.log(myInputCards[i].value);
+          console.log();
+
+          if (Number(myInputCards[i].value) !== myNewArr[i]) {
+            areEqual = false;
+            break;
+          }
+        }
+        if (areEqual === true) {
+          alert("hai vinto");
+        } else {
+          alert("hai perso");
+        }
+      });
     }
   }
 
@@ -71,5 +99,3 @@ function countdown(seconds) {
 
   const intervalId = setInterval(updateTimerDisplay, 1000);
 }
-
-countdown(5);

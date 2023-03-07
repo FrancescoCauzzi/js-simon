@@ -6,6 +6,9 @@
 
 .__container-fluid-outer {
   height: 85vh;
+  /* background-color: #1e3c6a; */
+  background-image: url(../img/woodtiles.jpg);
+  background-size: cover;
 }
 
 .__numbers-card,
@@ -32,7 +35,9 @@
 }
 
 .__container-inner {
-  border: 2px solid black;
+  /* border: 2px solid black; */
+  background-image: url(../img/woodtiles.jpg);
+  background-size: cover;
 }
 
 .__numbers-container {
@@ -54,4 +59,8 @@
   justify-content: center;
   align-items: center;
   font-weight: bolder;
+}
+
+#verify-btn {
+  display: none;
 }
