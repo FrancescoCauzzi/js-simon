@@ -50,17 +50,24 @@ function generateArrOfRandNumber(maxNumb, arrLength) {
   return myArr;
 }
 
+//let elementsContainerEL = document.querySelector(`.__elements-container`);
+// timerDisplay.innerHTML = "";
+//     let childElements = elementsContainerEL.children;
+//     for (let i = childElements.length - 1; i >= 0; i--) {
+//       elementsContainerEL.removeChild(childElements[i]);
+//     }
+
 // creao la funzione countdown
 function countdown() {
   let countdownStart = 6;
 
   generateNumbersDivs(numbersContainerEL, "div", 5, "__numbers-card");
   function updateTimerDisplay() {
+    let myCards = document.querySelectorAll(".__numbers-card");
     countdownStart--;
 
     timerDisplay.innerHTML = countdownStart;
 
-    let myCards = document.querySelectorAll(".__numbers-card");
     let myNewArr = [];
     for (let i = 0; i < myCards.length; i++) {
       myNewArr.push(Number(myCards[i].innerHTML));
