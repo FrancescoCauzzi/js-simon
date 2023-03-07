@@ -8,9 +8,10 @@
   height: 85vh;
 }
 
-.__numbers-card {
+.__numbers-card,
+.__input-card {
   background-size: contain;
-
+  width: calc(100% / 5);
   border: 2px solid black;
   display: flex;
   justify-content: center;
@@ -20,11 +21,25 @@
   font-weight: bolder;
 }
 
+.__input-card {
+  font-size: 0.8em;
+}
+
+.__input-card input {
+  width: 80%;
+  height: 40%;
+  font-size: 3em;
+}
+
 .__container-inner {
   border: 2px solid black;
 }
 
 .__numbers-container {
+  width: 80%;
+}
+
+.__input-container {
   width: 80%;
 }
 

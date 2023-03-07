@@ -1,6 +1,23 @@
 let numbersContainerEL = document.querySelector(".__numbers-container");
+let inputContainerEl = document.querySelector(".__input-container");
 
 let timerDisplay = document.querySelector(".__timer-card");
+
+// create a function that generates the input divs
+function generateInputDivs(father, type, number, className) {
+  for (let i = 0; i < number; i++) {
+    let myInput = document.createElement("input");
+    myInput.type = "number";
+    let myDiv = document.createElement(type);
+    myDiv.classList.add(className);
+
+    myDiv.style.aspectRatio = "1/1";
+    myDiv.style.backgroundImage = "url('img/cardbg.jpg')";
+    myDiv.append(myInput);
+
+    father.append(myDiv);
+  }
+}
 
 // create a function that generates the divs with the numbers inside and attach them to the father container
 
@@ -44,6 +61,7 @@ function countdown(seconds) {
     if (countdownStart === 0) {
       for (let i = 0; i < myCards.length; i++) {
         myCards[i].innerHTML = "";
+        generateInputDivs(inputContainerEl, "div", 1, "__input-card");
       }
       clearInterval(intervalId);
     }
@@ -54,4 +72,4 @@ function countdown(seconds) {
   const intervalId = setInterval(updateTimerDisplay, 1000);
 }
 
-countdown(10);
+countdown(5);
