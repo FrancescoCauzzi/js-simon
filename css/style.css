@@ -7,3 +7,36 @@
 .__container-fluid-outer {
   height: 85vh;
 }
+
+.__numbers-card {
+  background-size: contain;
+
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 3em;
+  font-weight: bolder;
+}
+
+.__container-inner {
+  border: 2px solid black;
+}
+
+.__numbers-container {
+  width: 80%;
+}
+
+.__timer-card {
+  background-image: url(../img/clock.jpg);
+  width: calc(100% / 3.5);
+  aspect-ratio: 1/1;
+  background-size: contain;
+  color: #cef72d;
+  font-size: 7em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+}
