@@ -3,3 +3,7 @@
   margin: 0;
   padding: 0;
 }
+
+.__container-fluid-outer {
+  height: 85vh;
+}
