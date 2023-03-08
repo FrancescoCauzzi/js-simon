@@ -1,11 +1,12 @@
 let numbersContainerEL = document.querySelector(".__numbers-container");
 let inputContainerEl = document.querySelector(".__input-container");
+let buttonContainerEl = document.querySelector(".__button-container");
+
+let elementsContainerEL = document.querySelector(`.__elements-container`);
 
 let timerDisplay = document.querySelector(".__timer-card");
 let verifyBtn = document.getElementById("verify-btn");
 let playBtn = document.getElementById("play-btn");
-
-playBtn.addEventListener("click", countdown);
 
 // create a function that generates the input divs
 function generateInputDivs(father, type, number, className) {
@@ -50,59 +51,70 @@ function generateArrOfRandNumber(maxNumb, arrLength) {
   return myArr;
 }
 
-//let elementsContainerEL = document.querySelector(`.__elements-container`);
-// timerDisplay.innerHTML = "";
-//     let childElements = elementsContainerEL.children;
-//     for (let i = childElements.length - 1; i >= 0; i--) {
-//       elementsContainerEL.removeChild(childElements[i]);
-//     }
+function resetTheGame(elementsContainerEL) {
+  let childElements = elementsContainerEL.children;
+  for (let i = childElements.length - 1; i >= 0; i--) {
+    elementsContainerEL.removeChild(childElements[i]);
+  }
+}
 
 // creao la funzione countdown
+
 function countdown() {
+  resetTheGame(numbersContainerEL);
+  resetTheGame(inputContainerEl);
+  generateNumbersDivs(numbersContainerEL, "div", 5, "__numbers-card");
   let countdownStart = 6;
 
-  generateNumbersDivs(numbersContainerEL, "div", 5, "__numbers-card");
   function updateTimerDisplay() {
-    let myCards = document.querySelectorAll(".__numbers-card");
     countdownStart--;
 
     timerDisplay.innerHTML = countdownStart;
-
+    let myCards = document.querySelectorAll(".__numbers-card");
     let myNewArr = [];
     for (let i = 0; i < myCards.length; i++) {
       myNewArr.push(Number(myCards[i].innerHTML));
     }
+
     if (countdownStart === 0) {
+      timerDisplay.innerHTML = "";
       for (let i = 0; i < myCards.length; i++) {
         myCards[i].innerHTML = "";
         verifyBtn.style.display = "block";
-        generateInputDivs(inputContainerEl, "div", 1, "__input-card");
       }
-      clearInterval(intervalId);
 
+      generateInputDivs(inputContainerEl, "div", 5, "__input-card");
       verifyBtn.addEventListener("click", function () {
-        let myInputCards = document.querySelectorAll(".__input-card input");
-        console.log(myCards);
-        let areEqual = true;
-        for (let i = 0; i < myInputCards.length; i++) {
-          console.log(myInputCards[i].value);
-          console.log();
+        verifyBtn.style.display = "none";
 
-          if (Number(myInputCards[i].value) !== myNewArr[i]) {
-            areEqual = false;
-            break;
-          }
-        }
-        if (areEqual === true) {
-          alert("hai vinto");
-        } else {
-          alert("hai perso");
-        }
+        let myInputCards = document.querySelectorAll(".__input-card input");
+        let areEqual = arraysAreEqual(myNewArr, myInputCards);
+
+        console.log(areEqual, myNewArr);
       });
+
+      clearInterval(intervalId);
     }
   }
-
   updateTimerDisplay();
-
   const intervalId = setInterval(updateTimerDisplay, 1000);
+}
+
+playBtn.addEventListener("click", countdown);
+
+// let numbersContainerEL = document.querySelector(".__numbers-container");
+// let inputContainerEl = document.querySelector(".__input-container");
+// let buttonContainerEl = document.querySelector(".__button-container");
+
+// Check if two array are equal in length and values inside
+function arraysAreEqual(array1, array2) {
+  if (array1.length !== array2.length) {
+    return false;
+  }
+  for (let i = 0; i < array1.length; i++) {
+    if (array1[i] !== array2[i]) {
+      return false;
+    }
+  }
+  return true;
 }
